@@ -83,7 +83,7 @@ for subject_id in matched_subjects:
                             slide_id = subject_id + '___' + session_id + '___' + svs_file_name
                             slide_ids.append(slide_id)
 
-# %% CREATE DATAFRAME
+# %% GET LABELS
 clinical_data_dict = clinical_data.set_index(['External Id', 'External Sample Id'])['Histological Diagnosis (Source Text)'].to_dict()
 
 data = []
@@ -101,6 +101,29 @@ for slide_id in slide_ids:
 data = [dict(t) for t in {tuple(d.items()) for d in data}]
 
 df_KI67 = pd.DataFrame(data)
+
+# %% GET AGE AT DIAGNOSIS (AGE)
+
+# add age at diagnosis (days) to df_KI67
+
+# get age at diagnosis (days) from clinical data
+clinical_data_dict = clinical_data.set_index(['External Id', 'External Sample Id'])['Age at Diagnosis (Days)'].to_dict()
+
+data = []
+
+for slide_id in slide_ids:
+    subject_id = slide_id.split('___')[0]
+    session_id = slide_id.split('___')[1]
+
+    if (subject_id, session_id) in clinical_data_dict:
+        age = clinical_data_dict[(subject_id, session_id)]
+        data.append({'case_id': subject_id, 'slide_id': slide_id, 'age': age})
+
+# remove duplicates based on slide_id
+data = [dict(t) for t in {tuple(d.items()) for d in data}]
+
+df_KI67 = pd.merge(df_KI67, pd.DataFrame(data), on=['case_id', 'slide_id'], how='left')
+
 
 # %% RENAME LABELS  
 df_KI67['label'] = df_KI67['label'].replace({
