@@ -1,3 +1,11 @@
+'''
+Script to summarise the data in the CBTN KI-67 dataset.
+
+Loads the CSV file and prints a summary table and barplot of 
+the number of subjects and slides with KI-67 stain per tumour 
+family/type.
+'''
+
 # %% IMPORTS
 import pandas as pd
 import numpy as np
@@ -25,11 +33,9 @@ print(f'Total number of slides: {merged_df_KI67["Number of Images"].sum()}')
 
 # %% TABLE OF CONTENTS
 markdown_table = merged_df_KI67.to_markdown(index=False)
-
 print(markdown_table)
 
 # %% BAR PLOT
-
 bar_width = 0.4
 x = np.arange(len(merged_df_KI67['Label']))
 

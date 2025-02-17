@@ -1,9 +1,14 @@
+'''
+Script to curate the data in the CBTN KI-67 dataset.
+
+Loads the clinical data xlsx file and the images directory 
+to filter the data and extract the case_id, slide_id and
+label information.
+'''
+
 # %% IMPORTS
 import pandas as pd
 import os
-import numpy as np
-import matplotlib.pyplot as plt
-
 
 # %% LOAD CSV FILES & DIRECTORIES
 clinical_data = pd.read_excel('/run/media/chrsp39/CBNT_v2/Datasets/CBTN_v2/CSV_FILES/CBTN_clinical_data_from_portal.xlsx', sheet_name=3)
