@@ -86,4 +86,7 @@ for ki67_index, ki67_row in df_KI67.iterrows():
         # assign the tumor descriptor to df_KI67
         df_KI67.at[ki67_index, 'tumor_descriptor'] = closest_row['tumor_descriptor']
 
+# %% SAVE CSV FILE
+df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67.csv', index=False)
+
 # %%
