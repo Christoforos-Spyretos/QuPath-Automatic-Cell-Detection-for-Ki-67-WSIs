@@ -1,3 +1,11 @@
+'''
+Script to extract the tumor descriptor from the MRI data 
+and assign it to the KI67 data.
+
+The tumor descriptor is the MRI session that is closest to 
+the age at histological diagnosis of the patient.
+'''
+
 # %% IMPORTS
 import pandas as pd
 
@@ -5,7 +13,7 @@ import pandas as pd
 df_KI67 = pd.read_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67.csv')
 df_MRI = pd.read_excel('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/MRI_summary_extended.xlsx')
 
-# rename column name in MRI df from 'subjetID' to 'subjectID'  
+# rename column name in df_MRI from 'subjetID' to 'subjectID'  
 df_MRI.rename(columns={'subjetID': 'subjectID'}, inplace=True)
 
 # %% FILTER SUBJECTS AND RENAME MRI DATA BASED ON TUMOUR TYPES
@@ -66,7 +74,6 @@ for ki67_index, ki67_row in df_KI67.iterrows():
     label = ki67_row['label']
     age_at_diagnosis = ki67_row['age_at_diagnosis_(days)']
 
-    # filter MRI rows for the same subject and diagnosis
     mri_rows = df_MRI[(df_MRI['subjectID'] == subject_id) & (df_MRI['diagnosis'] == label)]
     
     if not mri_rows.empty:

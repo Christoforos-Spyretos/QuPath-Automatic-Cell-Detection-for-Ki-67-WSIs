@@ -1,5 +1,6 @@
 '''
-
+Script that gets the KI-67 WSIs from the CBTN dataset and 
+organises them in a new directory.
 '''
 
 # %% IMPORTS

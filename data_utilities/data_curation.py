@@ -29,7 +29,6 @@ tumor_types = [
     'Ganglioglioma'
     ]
 
-# Filter clinical data based on tumour types
 clinical_data = clinical_data[clinical_data['Histological Diagnosis (Source Text)'].isin(tumor_types)]
 
 # %% GET IDS
@@ -59,7 +58,6 @@ KI67_names = ["KI-67", "ki-67", "Ki-67", "KI67", "Ki067_A2", "Ki-62", "Ki-57", "
          "Ki-67_B6", "3477-ki67", "3477-ki67-001", "Ki-67-A", "1_E_Ki67", "956_1A_KI67", "1184_-_2A_Ki67_MIB-1", "Ki-67_(S-14-904)", "Ki-67_FSB",
          "Ki-67_(D)", "Ki-67_(A)", "KI-67_BLOCK_2", "KI-67_BLOCK_1", "Ki-67_C9", "Ki-67_(A1)", "10412_1B_KI67"],
 
-# Flatten the KI67_names list
 KI67_names = [item for sublist in KI67_names for item in sublist]
 
 slide_ids = []
