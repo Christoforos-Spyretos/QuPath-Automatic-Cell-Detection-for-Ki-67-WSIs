@@ -1,2 +1,5 @@
 # IGNORE xlsx files
 *.xlsx
+
+# IGNORE 
+test.py
