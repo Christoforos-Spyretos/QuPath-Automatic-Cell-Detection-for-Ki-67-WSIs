@@ -15,8 +15,8 @@ clinical_data = pd.read_excel('/run/media/chrsp39/CBNT_v2/Datasets/CBTN_v2/CSV_F
 path_to_imgs = '/run/media/chrsp39/CBNT_v2/Datasets/CBTN_v2/HISTOLOGY/SUBJECTS'
 
 # %% FILTER CLINICAL DATA 
-# brain tumour types interested in
-tumour_types = [
+# brain tumor types interested in
+tumor_types = [
     'Low-grade glioma/astrocytoma (WHO grade I/II)',
     'High-grade glioma/astrocytoma (WHO grade III/IV)', 
     'Medulloblastoma',
@@ -30,7 +30,7 @@ tumour_types = [
     ]
 
 # Filter clinical data based on tumour types
-clinical_data = clinical_data[clinical_data['Histological Diagnosis (Source Text)'].isin(tumour_types)]
+clinical_data = clinical_data[clinical_data['Histological Diagnosis (Source Text)'].isin(tumor_types)]
 
 # %% GET IDS
 external_ids = clinical_data['External Id']
@@ -102,10 +102,7 @@ data = [dict(t) for t in {tuple(d.items()) for d in data}]
 
 df_KI67 = pd.DataFrame(data)
 
-# %% GET AGE AT DIAGNOSIS (AGE)
-
-# add age at diagnosis (days) to df_KI67
-
+# %% GET AGE AT DIAGNOSIS (DAYS)
 # get age at diagnosis (days) from clinical data
 clinical_data_dict = clinical_data.set_index(['External Id', 'External Sample Id'])['Age at Diagnosis (Days)'].to_dict()
 
@@ -117,13 +114,12 @@ for slide_id in slide_ids:
 
     if (subject_id, session_id) in clinical_data_dict:
         age = clinical_data_dict[(subject_id, session_id)]
-        data.append({'case_id': subject_id, 'slide_id': slide_id, 'age': age})
+        data.append({'case_id': subject_id, 'slide_id': slide_id, 'age_at_diagnosis_(days)': age})
 
 # remove duplicates based on slide_id
 data = [dict(t) for t in {tuple(d.items()) for d in data}]
 
 df_KI67 = pd.merge(df_KI67, pd.DataFrame(data), on=['case_id', 'slide_id'], how='left')
-
 
 # %% RENAME LABELS  
 df_KI67['label'] = df_KI67['label'].replace({

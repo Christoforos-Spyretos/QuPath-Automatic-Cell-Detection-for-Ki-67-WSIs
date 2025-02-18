@@ -27,12 +27,13 @@ print(f"Total number of slides to be resized: {len(slide_ids)}.")
 resized_slide_ids = os.listdir(save_path)
 print(f"Total number of slides already resized: {len(resized_slide_ids)}.")
 
-slide_ids_count = 0 + len(resized_slide_ids)
+slide_ids_count = 0
 
 start_time = datetime.now()
 
 for slide_id in slide_ids:
-    resized_slide_id_path = os.path.join(save_path, slide_id)
+    slide_name = os.path.splitext(slide_id)[0]
+    resized_slide_id_path = os.path.join(save_path, slide_name + ".png")
     if os.path.exists(resized_slide_id_path):
         print(f"Resized slide already exist: {slide_id}. Skipping...")
         slide_ids_count += 1
@@ -58,7 +59,7 @@ for slide_id in slide_ids:
     image.save(save_filename, format='PNG', optimize=True, quality=90)
 
 
-    print(f" Slides that are resized: {slide_ids_count}/{len(slide_ids)}.")
+    print(f"Slides that are resized: {slide_ids_count}/{len(slide_ids)}.")
     print("------------------------------------------------------------")
 
 end_time = datetime.now()
