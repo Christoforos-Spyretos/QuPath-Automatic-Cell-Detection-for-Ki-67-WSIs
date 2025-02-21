@@ -56,4 +56,70 @@ plt.show()
 
 plt.savefig('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/Barplot_of_Number_of_subjects_and_slides_with_KI-67_stain_per_tumour_family_type.png')
 
+# %% 
+# subjects with 2 or more diagnoses 
+print('Subjects with 2 or more diagnoses:')
+i = 0
+for subject in df_KI67['case_id'].unique():
+    if len(df_KI67[df_KI67['case_id'] == subject]) > 1:
+        i += 1
+        print(subject)
+
+print(f'Total number of subjects with 2 or more diagnoses: {i}')
+
+# %%
+print('Subjects with 2 or more tumor descriptors:')
+i = 0
+# subjects with 2 or more tumor descriptors 
+for subject in df_KI67['case_id'].unique():
+    if df_KI67[df_KI67['case_id'] == subject]['tumor_descriptor'].nunique() > 1:
+        i += 1
+        print(subject)
+    
+print(f'Total number of subjects with 2 or more tumor descriptors: {i}')
+
+# %%
+print('Subjects with initial CNS tumor:')
+i = 0
+# subjects with initial CNS tumor
+for subject in df_KI67['case_id'].unique():
+    if df_KI67.loc[df_KI67['case_id'] == subject, 'tumor_descriptor'].eq('Initial CNS Tumor').any():
+        i += 1
+        print(subject)
+    
+print(f'Total number of subjects with initial CNS tumor: {i}')
+
+# %%
+print('Subjects with second malignacy:')
+i = 0
+# subjects with second malignancy
+for subject in df_KI67['case_id'].unique():
+    if df_KI67.loc[df_KI67['case_id'] == subject, 'tumor_descriptor'].eq('Second Malignancy').any():
+        i += 1
+        print(subject)
+    
+print(f'Total number of subjects with second malignacy: {i}')
+
+# %%
+print('Subjects with progressive:')
+i = 0
+# subjects with progressive
+for subject in df_KI67['case_id'].unique():
+    if df_KI67.loc[df_KI67['case_id'] == subject, 'tumor_descriptor'].eq('Progressive').any():
+        i += 1
+        print(subject)
+    
+print(f'Total number of subjects with progressive: {i}')
+
+# %%
+print('Subjects with recurrence:')
+i = 0
+# subjects with recurrence
+for subject in df_KI67['case_id'].unique():
+    if df_KI67.loc[df_KI67['case_id'] == subject, 'tumor_descriptor'].eq('Recurrence').any():
+        i += 1
+        print(subject)
+    
+print(f'Total number of subjects with recurrence: {i}')
+
 # %%
