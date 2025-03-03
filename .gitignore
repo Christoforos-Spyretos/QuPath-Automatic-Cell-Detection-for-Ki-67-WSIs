@@ -1,5 +1,6 @@
 # IGNORE xlsx files
 *.xlsx
+KI67_new_images_results.csv
 
 # IGNORE 
 test.py
