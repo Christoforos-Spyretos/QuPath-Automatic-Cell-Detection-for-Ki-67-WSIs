@@ -132,6 +132,31 @@ df_KI67['label'] = df_KI67['label'].replace({
     'Ganglioglioma': 'GANG'
 })
 
+# %% REMOVE DATA
+# WSIs that look like H&E slides
+HE_slide_ids = ['C1198881___7316-4738___Ki-67', 'C1248204___7316-4920___Ki-67', 'C1061121___7316-4740___Ki-67', 
+            'C1277601___7316-5153___Ki67', 'C2334909___7316-5280___Ki-67_C1', 'C1060383___7316-4347___Ki-67', 
+            'C2335155___7316-5277___Ki-67_C1', 'C1222743___7316-4907___Ki-67', 'C1264932___7316-5151___KI-67', 
+            'C2322117___7316-5274___Ki-67', 'C829266___7316-4353___Ki-67', 'C1026435___7316-4067___Ki-67_B1',
+            'C964566___7316-3939___Ki-67_B1', 'C1248081___7316-4919___Ki-67', 'C1233075___7316-4917___Ki-67',
+            'C2313876___7316-5156___Ki-67_B1', 'C2345856___7316-5301___Ki-67', 'C1060998___7316-4349___Ki-67',
+            'C1264809___7316-5150___Ki-67','C1095069___7316-4432___Ki-67_A1', 'C1054479___7316-4340___Ki-67_B1', 
+            'C2313999___7316-5159___KI-67_A1','C2313384___7316-4927___Ki-67_B2', 'C1263456___7316-4739___Ki-67',
+            'C1223358___7316-4908___Ki67_B1', 'C2313630___7316-5155___Ki-67_B1', 'C959400___7316-3940___Ki-67_A1',
+            'C1060506___7316-4346___Ki-67']
+
+df_KI67 = df_KI67[~df_KI67['slide_id'].isin(HE_slide_ids)]
+
+# WSIs that do not look like Ki-67 stained slides
+other_slide_ids = ['C116850___7316-499___Ki-67_B']
+
+df_KI67 = df_KI67[~df_KI67['slide_id'].isin(other_slide_ids)]
+
+# WSIs that the file is damaged
+damaged_slide_ids = ['C36408___7316-2901___Ki-67']
+
+df_KI67 = df_KI67[~df_KI67['slide_id'].isin(damaged_slide_ids)]
+
 # %% SAVE CSV FILE
 df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67.csv', index=False)
 

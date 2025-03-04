@@ -87,7 +87,7 @@ for ki67_index, ki67_row in df_KI67.iterrows():
         df_KI67.at[ki67_index, 'tumor_descriptor'] = closest_row['tumor_descriptor']
 
 # %% SAVE CSV FILE
-df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67.csv', index=False)
+df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67_aligned_with_MRI.csv', index=False)
 
 # %% FEEL MISSING INFO MANALLY
 df_KI67.loc[(df_KI67['case_id'] == 'C22017') & (df_KI67['slide_id'] == 'C22017___7316-70___Ki-67'), ['label', 'tumor_descriptor']] = ['GANG', 'Initial CNS Tumor']
@@ -100,7 +100,7 @@ df_KI67.loc[(df_KI67['case_id'] == 'C245754') & (df_KI67['slide_id'] == 'C245754
 df_KI67.loc[(df_KI67['case_id'] == 'C19926') & (df_KI67['slide_id'] == 'C19926___7316-7502___KI-67'), ['tumor_descriptor']] = ['Second Malignacy']
 
 # save csv file
-df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67.csv', index=False)
+df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67_aligned_with_MRI.csv', index=False)
 
 # %%
 # subjects with 2 or more diagnoses 
@@ -193,6 +193,6 @@ for subject in df_KI67['case_id'].unique():
 print(f'Total number of subjects with recurrence: {i}')
 
 # %% SAVE CSV FILE
-df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67.csv', index=False)
+df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67_aligned_with_MRI.csv', index=False)
 
 # %%
