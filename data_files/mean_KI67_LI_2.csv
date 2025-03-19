@@ -1,0 +1,61 @@
+case_id,label,mean_KI67_LI_2,age_at_diagnosis_(days),tumor_descriptor,Trend
+C121647,EP,0.65,1878.0,Initial CNS Tumor,Decreased
+C121647,EP,4.9,2967.0,Progressive,Increased
+C121647,EP,8.41,3841.0,Progressive,Increased
+C140343,EP,14.7,481.0,Initial CNS Tumor,Decreased
+C140343,EP,4.27,576.0,Progressive,Decreased
+C16974,GANG,3.21,1302.0,Initial CNS Tumor,Decreased
+C16974,GANG,0.68,5189.0,Progressive,Decreased
+C18327,LGG,9.95,2595.0,Initial CNS Tumor,Decreased
+C18327,LGG,7.03,2595.0,Initial CNS Tumor,Decreased
+C18327,LGG,14.45,3290.0,Progressive,Increased
+C21402,MEN,27.56,1384.0,Initial CNS Tumor,Decreased
+C21402,MEN,3.85,3504.0,Second Malignancy,Decreased
+C2442411,ATRT,37.57,1204.0,Initial CNS Tumor,Decreased
+C2442411,ATRT,32.55,1616.0,Progressive,Decreased
+C2697882,LGG,0.68,5457.0,Initial CNS Tumor,Decreased
+C2697882,LGG,0.16,6117.0,Recurrence,Decreased
+C271092,HGG,9.57,1527.0,Recurrence,Decreased
+C271092,HGG,0.73,1867.0,Progressive,Decreased
+C27552,MED,16.74,3856.0,Initial CNS Tumor,Decreased
+C27552,MED,0.16,6931.0,Progressive,Decreased
+C29766,EP,64.09,2141.0,Recurrence,Decreased
+C29766,EP,0.31,4521.0,Progressive,Decreased
+C30012,EP,2.25,2340.0,Progressive,Decreased
+C30012,EP,13.87,3171.0,Recurrence,Increased
+C3156795,LGG,0.76,1803.0,Initial CNS Tumor,Decreased
+C3156795,LGG,0.66,2204.0,Recurrence,Decreased
+C3185577,LGG,1.85,4256.0,Initial CNS Tumor,Decreased
+C3185577,LGG,1.5,4627.0,Progressive,Decreased
+C34809,HGG,12.8,5908.0,Initial CNS Tumor,Decreased
+C34809,HGG,37.85,8277.0,Recurrence,Increased
+C35793,EP,18.76,1223.0,Initial CNS Tumor,Decreased
+C35793,EP,7.06,2338.0,Recurrence,Decreased
+C37392,LGG,0.93,6860.0,Recurrence,Decreased
+C37392,LGG,0.06,8427.0,Progressive,Decreased
+C38868,LGG,0.68,4937.0,Second Malignancy,Decreased
+C38868,LGG,0.17,5497.0,Progressive,Decreased
+C38868,LGG,0.78,6061.0,Recurrence,Increased
+C38868,LGG,0.63,7684.0,Recurrence,Decreased
+C43542,GANG,1.41,6215.0,Initial CNS Tumor,Decreased
+C43542,GANG,3.92,8226.0,Progressive,Increased
+C47724,EP,4.13,4710.0,Initial CNS Tumor,Decreased
+C47724,EP,0.04,4710.0,Initial CNS Tumor,Decreased
+C47724,EP,18.0,5233.0,Progressive,Increased
+C53505,LGG,4.86,3924.0,Initial CNS Tumor,Decreased
+C53505,LGG,2.82,6135.0,Progressive,Decreased
+C55350,MED,14.3,2581.0,Initial CNS Tumor,Decreased
+C55350,MED,12.44,3623.0,Recurrence,Decreased
+C71217,LGG,1.1,2940.0,Initial CNS Tumor,Decreased
+C71217,LGG,0.41,5458.0,Progressive,Decreased
+C714384,HGG,16.89,2869.0,Initial CNS Tumor,Decreased
+C714384,HGG,7.3,3100.0,Progressive,Decreased
+C84747,MED,28.62,5075.0,Initial CNS Tumor,Decreased
+C84747,MED,6.82,6727.0,Progressive,Decreased
+C84747,MED,15.78,7398.0,Progressive,Increased
+C88683,LGG,0.54,1359.0,Initial CNS Tumor,Decreased
+C88683,LGG,0.3,1717.0,Recurrence,Decreased
+C88806,HGG,0.8,5653.0,Initial CNS Tumor,Decreased
+C88806,HGG,16.2,6234.0,Progressive,Increased
+C94956,HGG,5.75,6779.0,Initial CNS Tumor,Decreased
+C94956,HGG,1.5,7387.0,Recurrence,Decreased

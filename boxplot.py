@@ -17,19 +17,18 @@ df_alinged_with_MRI['label'] = df_alinged_with_MRI['label'].replace({'ASTR_LGG':
 
 # %% FILTERING 
 # number of excluded cases in full dataset
-df_sum_up_1 = df_sum_up[df_sum_up['slide_id'].isin(df_full_data['slide_id'])]
-na_count = df_sum_up_1['KI67_LI_2'].isna().sum()
+df_full_data = df_sum_up[df_sum_up['slide_id'].isin(df_full_data['slide_id'])]
+na_count = df_full_data['KI67_LI_2'].isna().sum()
 print(f"Number of excluded cases in full dataset': {na_count}")
 # drop the na values from the df_sum_up_1
-df_sum_up_1 = df_sum_up_1.dropna(subset=['KI67_LI_2'])
+df_full_data = df_full_data.dropna(subset=['KI67_LI_2'])
 
 # number of excluded cases in dataset with aligned MRI
-df_sum_up_2 = df_sum_up[df_sum_up['slide_id'].isin(df_alinged_with_MRI['slide_id'])]
-na_count = df_sum_up_2['KI67_LI_2'].isna().sum()
+df_alinged_with_MRI = df_sum_up[df_sum_up['slide_id'].isin(df_alinged_with_MRI['slide_id'])]
+na_count = df_alinged_with_MRI['KI67_LI_2'].isna().sum()
 print(f"Number of excluded cases in dataset with aligned MRI: {na_count}")
 # drop the na values from the df_sum_up_2
-df_sum_up_2 = df_sum_up_2.dropna(subset=['KI67_LI_2'])
-
+df_alinged_with_MRI = df_alinged_with_MRI.dropna(subset=['KI67_LI_2'])
 
 # %% BOXPLOT
 sns.set_style("whitegrid", {'axes.grid' : False})
@@ -37,7 +36,7 @@ plt.figure(figsize=(10, 6))
 plt.gca().set_facecolor('white')  
 flierprops = dict(marker='D', markerfacecolor='darkgrey', markersize=5, linestyle='none')
 order = ['LGG', 'GANG', 'HGG', 'MED', 'EP', 'MEN', 'DIPG', 'ATRT']
-boxplot = sns.boxplot(x='label', y='KI67_LI_2', data=df_sum_up_2, flierprops=flierprops, order=order)
+boxplot = sns.boxplot(x='label', y='KI67_LI_2', data=df_alinged_with_MRI, flierprops=flierprops, order=order)
 
 plt.title('Ki-67 label index across all diagnoses') 
 plt.xlabel('Diagnosis')
@@ -46,7 +45,7 @@ plt.tight_layout()
 plt.show()
 
 # %% BOXPLOT of initial_CNS_tumor
-initial_CNS_tumor = df_sum_up[df_sum_up['initial_CNS_tumor'] == 1]
+initial_CNS_tumor = df_alinged_with_MRI[df_alinged_with_MRI['initial_CNS_tumor'] == 1]
 
 sns.set_style("whitegrid", {'axes.grid' : False})
 plt.figure(figsize=(10, 6))  
@@ -61,7 +60,7 @@ plt.tight_layout()
 plt.show()
 
 # %% BOXPLOT of second_malignancy
-second_malignancy = df_sum_up[df_sum_up['second_malignancy'] == 1]
+second_malignancy = df_alinged_with_MRI[df_alinged_with_MRI['second_malignancy'] == 1]
 
 plt.figure(figsize=(10, 6))  
 plt.gca().set_facecolor('white')  
@@ -74,7 +73,7 @@ plt.tight_layout()
 plt.show()
 
 # %% BOXPLOT of progressive
-progressive = df_sum_up[df_sum_up['progressive'] == 1]
+progressive = df_alinged_with_MRI[df_alinged_with_MRI['progressive'] == 1]
 
 plt.figure(figsize=(10, 6))  
 plt.gca().set_facecolor('white')
@@ -87,7 +86,7 @@ plt.tight_layout()
 plt.show()
 
 # %% BOXPLOT of recurrence
-recurrence = df_sum_up[df_sum_up['recurrence'] == 1]
+recurrence = df_alinged_with_MRI[df_alinged_with_MRI['recurrence'] == 1]
 
 plt.figure(figsize=(10, 6))  
 plt.gca().set_facecolor('white')  
@@ -100,7 +99,7 @@ plt.tight_layout()
 plt.show()
 
 # %% PRINT TABLE WITH 2_or_more_tumor_descriptors
-df_sum_up_2_tumor_descriptors = df_sum_up[df_sum_up['2_or_more_tumor_descriptors'] == 1]
+df_sum_up_2_tumor_descriptors = df_alinged_with_MRI[df_alinged_with_MRI['2_or_more_tumor_descriptors'] == 1]
 df_sum_up_2_tumor_descriptors = df_sum_up_2_tumor_descriptors[['case_id', 'slide_id', 'label', 'KI67_LI_2', 'age_at_diagnosis_(days)', 'tumor_descriptor']]
 df_sum_up_2_tumor_descriptors = df_sum_up_2_tumor_descriptors.sort_values(by=['case_id', 'age_at_diagnosis_(days)'])
 # remove the case_id that has one entry 
@@ -131,6 +130,9 @@ def check_increase_decrease(df):
 mean_ki67_li_2 = check_increase_decrease(mean_ki67_li_2)
 
 mean_ki67_li_2 = mean_ki67_li_2[['case_id', 'label', 'mean_KI67_LI_2', 'age_at_diagnosis_(days)', 'tumor_descriptor', 'Trend']]
+
+markdown_table = mean_ki67_li_2.to_markdown(index=False)
+print(markdown_table)
 
 
 # %% PRINT TIF IMAGES

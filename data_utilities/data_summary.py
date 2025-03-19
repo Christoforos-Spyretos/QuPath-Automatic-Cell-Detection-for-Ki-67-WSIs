@@ -18,6 +18,7 @@ df_KI67_aligned_with_MRI = pd.read_csv('/local/data1/chrsp39/QuPath-Automatic-Ce
 # replace names
 df_KI67['label'] = df_KI67['label'].replace({'ASTR_LGG': 'LGG', 'ASTR_HGG': 'HGG'})
 df_KI67_aligned_with_MRI['label'] = df_KI67_aligned_with_MRI['label'].replace({'ASTR_LGG': 'LGG', 'ASTR_HGG': 'HGG'})
+print(len(df_KI67_aligned_with_MRI))
 
 # %% DATA SUMMARY OF KI-67 WITHOUT DROPPING NA VALUES
 subjects_per_tumour_KI67 = df_KI67.groupby(['case_id'])['label'].min().reset_index()
@@ -83,23 +84,23 @@ markdown_table = merged_df_KI67_aligned_with_MRI.to_markdown(index=False)
 print(markdown_table)
 
 # bar plot
-bar_width = 0.4
-x = np.arange(len(merged_df_KI67_aligned_with_MRI['Label']))
+# bar_width = 0.4
+# x = np.arange(len(merged_df_KI67_aligned_with_MRI['Label']))
 
-fig = plt.figure(figsize=(12, 8))
-plt.bar(x - bar_width/2, merged_df_KI67_aligned_with_MRI['Number of Subjects'], color='gray', width=0.4, label='Number of subjects')
-for i, count in enumerate(merged_df_KI67_aligned_with_MRI['Number of Subjects']):
-    plt.text(i - bar_width/2, count, str(count), ha='center', va='bottom', fontsize=10)
-plt.bar(x + bar_width/2, merged_df_KI67_aligned_with_MRI['Number of Images'], color='darkcyan', width=0.4, label='Number of slides')
-for i, count in enumerate(merged_df_KI67_aligned_with_MRI['Number of Images']):
-    plt.text(i + bar_width/2, count, str(count), ha='center', va='bottom', fontsize=10)
-plt.xlabel("Tumour family/type")
-plt.ylabel("Count")
-plt.title("Number of subjects and slides with KI-67 stain aligned with MRI per tumour family/type")
-plt.xticks(x, merged_df_KI67_aligned_with_MRI['Label'])
-plt.legend()
-plt.tight_layout()
-plt.show()
+# fig = plt.figure(figsize=(12, 8))
+# plt.bar(x - bar_width/2, merged_df_KI67_aligned_with_MRI['Number of Subjects'], color='gray', width=0.4, label='Number of subjects')
+# for i, count in enumerate(merged_df_KI67_aligned_with_MRI['Number of Subjects']):
+#     plt.text(i - bar_width/2, count, str(count), ha='center', va='bottom', fontsize=10)
+# plt.bar(x + bar_width/2, merged_df_KI67_aligned_with_MRI['Number of Images'], color='darkcyan', width=0.4, label='Number of slides')
+# for i, count in enumerate(merged_df_KI67_aligned_with_MRI['Number of Images']):
+#     plt.text(i + bar_width/2, count, str(count), ha='center', va='bottom', fontsize=10)
+# plt.xlabel("Tumour family/type")
+# plt.ylabel("Count")
+# plt.title("Number of subjects and slides with KI-67 stain aligned with MRI per tumour family/type")
+# plt.xticks(x, merged_df_KI67_aligned_with_MRI['Label'])
+# plt.legend()
+# plt.tight_layout()
+# plt.show()
 
 # plt.savefig('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_files/Barplot_of_Number_of_subjects_and_slides_with_KI-67_stain_aligned_with_MRI_per_tumour_family_type.png')
 
@@ -176,6 +177,13 @@ df_sum_up = pd.read_excel('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-
 df_sum_up['label'] = df_sum_up['label'].replace({'ASTR_LGG': 'LGG', 'ASTR_HGG': 'HGG'})
 # filtering
 df_KI67_sum_up = df_sum_up[df_sum_up['slide_id'].isin(df_KI67['slide_id'])]
+
+# Print cases with NaN values in 'KI67_LI_2' and their corresponding slide_id
+na_cases = df_KI67_sum_up[df_KI67_sum_up['KI67_LI_2'].isna()]
+print("Cases with NaN values in 'KI67_LI_2':")
+print('Number of cases:', len(na_cases))    
+print(na_cases[['case_id', 'slide_id']])
+
 # drop na values
 df_KI67_sum_up = df_KI67_sum_up.dropna(subset=['KI67_LI_2'])
 
@@ -200,7 +208,12 @@ markdown_table = merged_df_KI67_sum_up.to_markdown(index=False)
 print(markdown_table)
 
 # %% DATA SUMMARY OF KI-67 ALIGNED WITH MRI WITH DROPPING NA VALUES
+df_sum_up = pd.read_excel('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_files/KI67_sum_up.xlsx') 
+# replace names
+df_sum_up['label'] = df_sum_up['label'].replace({'ASTR_LGG': 'LGG', 'ASTR_HGG': 'HGG'})
 
+# filtering
+df_KI67_sum_up = df_sum_up[df_sum_up['slide_id'].isin(df_KI67['slide_id'])]
 # filtering
 df_sum_up_aligned_with_MRI = df_sum_up[df_sum_up['slide_id'].isin(df_KI67['slide_id'])]
 # drop na values

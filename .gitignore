@@ -1,11 +1,13 @@
 # IGNORE xlsx files
 *.xlsx
 KI67_new_images_results.csv
+*.png
 
 # IGNORE 
 test.py
 sum_up_xlsx.py
 boxplot.py
+old_summary_ratios.py
 
 # %% IGNORE FOLDER WITH JUAN'S CODES
 juan_codes/
