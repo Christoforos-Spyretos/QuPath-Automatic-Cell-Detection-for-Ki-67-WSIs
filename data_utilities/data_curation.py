@@ -12,6 +12,7 @@ import os
 
 # %% LOAD CSV FILES & DIRECTORIES
 clinical_data = pd.read_excel('/run/media/chrsp39/CBNT_v2/Datasets/CBTN_v2/CSV_FILES/CBTN_clinical_data_from_portal.xlsx', sheet_name=3)
+partipant_data = pd.read_excel('/run/media/chrsp39/CBNT_v2/Datasets/CBTN_v2/CSV_FILES/CBTN_clinical_data_from_portal.xlsx', sheet_name=0)
 path_to_imgs = '/run/media/chrsp39/CBNT_v2/Datasets/CBTN_v2/HISTOLOGY/SUBJECTS'
 
 # %% FILTER CLINICAL DATA 
@@ -132,6 +133,18 @@ df_KI67['label'] = df_KI67['label'].replace({
     'Ganglioglioma': 'GANG'
 })
 
+# %% ADD ADDITIONAL DATA
+# add sex information to the dataframe
+participant_sex_dict = partipant_data.set_index('External Id')['Gender'].to_dict()
+
+df_KI67['sex'] = df_KI67['case_id'].map(lambda case_id: participant_sex_dict.get(case_id.split('-')[0], 'Unknown'))
+
+# add race information to the dataframe
+race_partipant_data = partipant_data[partipant_data['Race'] != 'Not Reported']
+participant_race_dict = race_partipant_data.set_index('External Id')['Race'].to_dict()
+
+df_KI67['race'] = df_KI67['case_id'].map(lambda case_id: participant_race_dict.get(case_id.split('-')[0], 'Unknown'))
+
 # %% REMOVE DATA
 # WSIs that look like H&E slides
 HE_slide_ids = ['C1198881___7316-4738___Ki-67', 'C1248204___7316-4920___Ki-67', 'C1061121___7316-4740___Ki-67', 
@@ -158,6 +171,6 @@ damaged_slide_ids = ['C36408___7316-2901___Ki-67']
 df_KI67 = df_KI67[~df_KI67['slide_id'].isin(damaged_slide_ids)]
 
 # %% SAVE CSV FILE
-df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/Data_Files/CBTN_KI67.csv', index=False)
+df_KI67.to_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_files/CBTN_KI67.csv', index=False)
 
 # %%
