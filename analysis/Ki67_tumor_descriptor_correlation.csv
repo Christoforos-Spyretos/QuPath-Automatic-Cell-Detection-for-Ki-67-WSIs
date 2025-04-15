@@ -1,0 +1,5 @@
+tumor_descriptor,Kruskal_Wallis_Statistic,p_value,significant
+Initial CNS Tumor,0.09674689789415825,0.7557689712058948,False
+Progressive,2.3199549963425157,0.12772372134133295,False
+Second Malignancy,1.1348046424652274,0.28675281547671677,False
+Recurrence,0.349908237502024,0.5541650791862602,False
