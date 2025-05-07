@@ -409,6 +409,46 @@ final_results['age_at_diagnosis_(years)'] = final_results['age_at_diagnosis_(day
 mean_age_years = final_results['age_at_diagnosis_(years)'].mean()
 std_age_years = final_results['age_at_diagnosis_(years)'].std()
 print(f'Mean age: {mean_age_years:.2f} ± {std_age_years:.2f}')
+print()
+
+# Number of unique case_id per label per tumor_descriptor
+print('Number of unique case_id per label per tumor_descriptor:')
+case_id_summary = final_results.groupby(['tumor_descriptor', 'label']).agg(
+    num_unique_case_id=('case_id', 'nunique')
+).reset_index()
+
+print('| Tumor Descriptor | Label       | Number of Unique Case IDs |')
+print('|------------------|-------------|---------------------------|')
+for _, row in case_id_summary.iterrows():
+    print(f"| {row['tumor_descriptor']} | {row['label']} | {row['num_unique_case_id']} |")
+
+print()
+
+# Total number of slide_id per label per tumor_descriptor
+print('Total number of slide_id per label per tumor_descriptor:')
+summary = final_results.groupby(['tumor_descriptor', 'label']).agg(
+    total_slide_id=('slide_id', 'count')
+).reset_index()
+
+print('| Tumor Descriptor | Label       | Total Number of Slide IDs |')
+print('|------------------|-------------|---------------------------|')
+for _, row in summary.iterrows():
+    print(f"| {row['tumor_descriptor']} | {row['label']} | {row['total_slide_id']} |")
+
+print()
+
+# Sex distribution per unique case_id per label per tumor_descriptor
+print('Sex distribution per unique case_id per label per tumor_descriptor:')
+sex_distribution = final_results.groupby(['tumor_descriptor', 'label', 'sex']).agg(
+    num_unique_case_id=('case_id', 'nunique')
+).reset_index()
+
+print('| Tumor Descriptor | Label       | Sex    | Number of Unique Case IDs |')
+print('|------------------|-------------|--------|---------------------------|')
+for _, row in sex_distribution.iterrows():
+    print(f"| {row['tumor_descriptor']} | {row['label']} | {row['sex']} | {row['num_unique_case_id']} |")
+
+print()
 
 # %% AGE DISTRIBUTION
 df_KI67 = pd.read_csv('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_files/CBTN_KI67.csv')
@@ -483,29 +523,40 @@ plt.show()
 
 # %%
 # overlapping density plot for age at diagnosis (years) by sex
-plt.figure(figsize=(16, 6))
+palette = sns.color_palette("deep", 10)
+male_color = palette[0]
+female_color = palette[6]
+
+plt.figure(figsize=(8, 6))
 sns.kdeplot(
     data=df_KI67, 
     x='age_at_diagnosis_(years)', 
     hue='sex', 
     fill=True, 
-    alpha=0.5, 
-    palette={'Male': 'cornflowerblue', 'Female': 'hotpink'},
+    alpha=0.9, 
+    palette={'Male': male_color, 'Female': female_color},
     linewidth=0
 )
 plt.title('')
-plt.legend('')
-plt.xlabel('')
-plt.xticks(fontsize=16)
+plt.legend(title='', 
+           labels=['Male', 'Female'], 
+           fontsize=14, 
+           loc='upper right',
+           edgecolor='gray',
+           facecolor='whitesmoke')
+
+plt.xlabel('Age at Diagnosis (Years)', fontsize=14)
+plt.xticks(fontsize=14)
 plt.xlim(left=0, right=40)
-plt.ylabel('')
-plt.yticks([0, 0.005, 0.010, 0.015, 0.020, 0.025], ['0', '5', '10', '15', '20', '25'], fontsize=16)
-plt.grid(axis='y', linestyle='-', alpha=0.8)
+plt.ylabel('Number of Cases', fontsize=14)
+plt.yticks([0, 0.005, 0.010, 0.015, 0.020, 0.025], ['0', '5', '10', '15', '20', '25'], fontsize=14)
 plt.gca().set_facecolor('white')
-for spine in plt.gca().spines.values():
-    spine.set_visible(False)
+
+# for y in [0.005, 0.010, 0.015, 0.020, 0.025]:
+#     plt.axhline(y=y, color='gray', linestyle='-', linewidth=0.5, alpha=0.5)
+
 plt.tight_layout()
-plt.savefig('age_at_diagnosis_density_by_sex.svg', dpi=600, bbox_inches='tight')
+plt.savefig('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_utilities/age_at_diagnosis_density_by_sex.png', dpi=600, bbox_inches='tight')
 plt.show()
 
 # %%
@@ -579,6 +630,7 @@ plt.show()
 
 # %% TUMOR DESCRIPTOR DISTRIBUTION
 final_results = pd.read_excel('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_files/QuPath_Ki-67_summary_analysis.xlsx')
+# final_results = final_results[final_results['Quality'] != 'Exclude']
 final_results = final_results[['case_id', 'label', 'tumor_descriptor']].drop_duplicates()
 
 print('Tumor descriptor distribution:')
@@ -587,6 +639,9 @@ tumor_descriptor_percentages = (tumor_descriptor_counts / tumor_descriptor_count
 tumor_descriptor_counts_with_percentages = tumor_descriptor_counts.astype(str) + " (" + tumor_descriptor_percentages.round(1).astype(str) + "%)"
 print(tumor_descriptor_counts_with_percentages)
 print()
+
+
+# %%
 
 print('Subjects with 2 or more tumor descriptors:')
 i = 0
@@ -703,7 +758,7 @@ for spine in ax.spines.values():
 
 plt.tight_layout()
 plt.yticks([])
-plt.savefig('tumor_descriptor_distribution.svg', dpi=600, bbox_inches='tight')
+plt.savefig('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_utilities/tumor_descriptor_distribution.svg', dpi=600, bbox_inches='tight')
 plt.show()
 
 initial_cns_results = final_results[final_results['tumor_descriptor'] == 'Initial CNS Tumor']
@@ -780,7 +835,7 @@ combined_tumor_descriptors = pd.concat([
     ], ignore_index=True)
 
 # bar plot
-palette = sns.color_palette("dark", 10)  
+palette = sns.color_palette("deep", 10)  
 
 astr_lgg_color = palette[0]
 astr_hgg_color = palette[1]
@@ -839,24 +894,27 @@ for label in order:
 
 fig, ax = plt.subplots(figsize=(12, 6))
 bars = ax.bar(x_positions, ordered_counts.values, color=custom_colors)
+
 for bar, count in zip(bars, ordered_counts.values):
     height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width() / 2, height, f"{int(count)}", ha='center', va='bottom', fontsize=10)
-    
-ax.yaxis.grid(True, linestyle='-', linewidth=0.5, color='gray', alpha=0.7)
-ax.set_xlabel('')
-ax.set_ylabel('')
-ax.set_title('')
-plt.gca().set_facecolor('white')
-for spine in ax.spines.values():
-    spine.set_visible(False)
-ax.set_xticks(x_positions)
-ax.set_xticklabels(order, rotation=45, ha='right')
+    ax.text(bar.get_x() + bar.get_width() / 2, height, f"{int(count)}", ha='center', va='bottom', fontsize=12)
 
+legend_labels = ['LGG', 'HGG', 'MED', 'EP', 'GANG', 'MEN', 'ATRT', 'DNET', 'DIPG']
+legend_colors = [astr_lgg_color, astr_hgg_color ,med_color, ep_color, gang_color, 
+                 men_color, atrt_color, dnet_color, dipg_color]
+ax.legend(handles=[plt.Rectangle((0, 0), 1, 1, color=color) for color in legend_colors], 
+          labels=legend_labels, title='Tumor Families/Types', fontsize=14, title_fontsize=14, loc='upper right',  edgecolor='gray',
+           facecolor='whitesmoke')
+
+
+for y in [25, 50, 75, 100, 125, 150, 175]:
+    plt.axhline(y=y, color='gray', linestyle='-', linewidth=0.5, alpha=0.3)
+
+ax.set_xticks([])
+plt.ylabel('Number of Cases', fontsize=16)
+plt.yticks(fontsize=14) 
 plt.tight_layout()
-plt.xticks([])
-plt.yticks([25, 50, 75, 100, 125, 150, 175, 200], ['25', '50', '75', '100', '125', '150', '175', '200'])
-plt.savefig('per_label_tumor_descriptors.svg', dpi=600, bbox_inches='tight')
+plt.savefig('/local/data1/chrsp39/QuPath-Automatic-Cell-Detection-for-Ki-67-WSIs/data_utilities/per_diagnosis_tumor_descriptors.png', dpi=600, bbox_inches='tight')
 plt.show()
 
 # %% 2 OR MORE DIAGNOSES
