@@ -50,7 +50,7 @@ if os.path.exists(result_dir) == False:
     os.makedirs(result_dir)
 
 # get the area and total detections
-annotation_df = pd.read_csv("bin/Area_Det.txt",names=['name', 'detections', 'area'],delimiter=";",index_col=False) 
+annotation_df = pd.read_csv("results/Area_Det.txt",names=['name', 'detections', 'area'],delimiter=";",index_col=False) 
 
 # %% RETRIEVE INFORMATION FROM JSON FILES 
 file_list = [f for f in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir,f))]

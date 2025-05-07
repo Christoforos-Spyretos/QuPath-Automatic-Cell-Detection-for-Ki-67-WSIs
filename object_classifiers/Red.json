@@ -1,0 +1,52 @@
+{
+  "object_classifier_type": "SimpleClassifier",
+  "function": {
+    "classifier_fun": "ClassifyByMeasurementFunction",
+    "measurement": "DAB: Mean",
+    "pathClassBelow": {
+      "name": "Negative",
+      "color": [
+        112,
+        112,
+        225
+      ]
+    },
+    "pathClassEquals": {
+      "name": "Positive",
+      "color": [
+        250,
+        62,
+        62
+      ]
+    },
+    "pathClassAbove": {
+      "name": "Positive",
+      "color": [
+        250,
+        62,
+        62
+      ]
+    },
+    "threshold": 0.2
+  },
+  "pathClasses": [
+    {
+      "name": "Negative",
+      "color": [
+        112,
+        112,
+        225
+      ]
+    },
+    {
+      "name": "Positive",
+      "color": [
+        250,
+        62,
+        62
+      ]
+    }
+  ],
+  "filter": "DETECTIONS_ALL",
+  "timestamp": 1727790656963
+}

@@ -7,3 +7,6 @@ analysis/
 data_files/
 data_utilities/
 Exclusion_Examples/
+
+# IGNORE FILES
+CBTN_KI67.csv
