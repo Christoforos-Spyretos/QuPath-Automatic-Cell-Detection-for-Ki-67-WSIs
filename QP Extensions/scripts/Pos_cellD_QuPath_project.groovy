@@ -38,17 +38,29 @@ import qupath.lib.analysis.heatmaps.ColorModels
 import qupath.lib.color.ColorMaps
 import qupath.lib.gui.measure.ObservableMeasurementTableData
 
-// SET OUTPUT
-def out_dir = buildFilePath('/Users/chrsp39/Desktop/QuPath_Portable_2', 'results')
+//SET DIRECTORIES
+def qupath = getQuPath()
+def project = qupath.getProject()
+
+def projectParentDir = project.getPath().getParent().getParent().toAbsolutePath().toString()
+
+// Create results folder
+def out_dir = buildFilePath(projectParentDir, 'results')
 mkdirs(out_dir)
+
+def rawDensityMapsDir = buildFilePath(out_dir, 'Raw Density Maps')
+mkdirs(rawDensityMapsDir)
 
 // Set up image:
 setImageType('BRIGHTFIELD_H_DAB');
 setColorDeconvolutionStains('{"Name" : "H-DAB default", "Stain 1" : "Hematoxylin", "Values 1" : "0.65111 0.70119 0.29049", "Stain 2" : "DAB", "Values 2" : "0.26917 0.56824 0.77759", "Background" : " 255 255 255"}');
 
+// Define the relative path for the object_classifiers directory
+def objectClassifiersPath = buildFilePath(projectParentDir, "pixel_classifiers")
+
 // Create and select annotation excluding pen marks/dark areas with the predefined pixel classifier (Base_classifier):
 resetSelection();
-createAnnotationsFromPixelClassifier("Base_classifier", 20000.0, 8000.0, "DELETE_EXISTING", "INCLUDE_IGNORED")
+createAnnotationsFromPixelClassifier(buildFilePath(objectClassifiersPath, "Base_Classifier.json"), 20000.0, 8000.0, "DELETE_EXISTING", "INCLUDE_IGNORED")
 selectAnnotations();
 
 selectObjectsByClassification("Region*");
@@ -218,7 +230,7 @@ println "Detecting cells..."
 // that takes 3 channel RGB as input (e.g. he_heavy_augment.pb)
 // You can find some at https://github.com/qupath/models
 // (Check credit & reuse info before downloading)
-def modelPath = "/Users/chrsp39/Desktop/QuPath_Portable_2/models/he_heavy_augment.pb" //he_heavy_augment.pb" dsb2018
+def modelPath = buildFilePath(projectParentDir, "models", "he_heavy_augment.pb")
 
 if(general_norm){ // Normalization over the downsampled full image.
   stardist = StarDist2D
@@ -468,7 +480,7 @@ builder.radius(radius) // Set cell density radius
 builder.buildClassifier(imageData) // to allow pixel size to be set according to input data
 builder.type(DensityMaps.DensityMapType.SUM) // this is the default, setting anyway
 
-fileName = buildFilePath(out_dir, imageNamePrefix + '_NegDMap' + '.tif')
+fileName = buildFilePath(rawDensityMapsDir, imageNamePrefix + '_NegDMap' + '.tif')
 
 println "saving negative cell density map..."
 
@@ -482,7 +494,7 @@ builder2.radius(radius) // Set cell density radius
 builder2.buildClassifier(imageData) // to allow pixel size to be set according to input data
 builder2.type(DensityMaps.DensityMapType.SUM) // this is the default, setting anyway
 
-fileName2 = buildFilePath(out_dir, imageNamePrefix + '_PosDMap' + '.tif')
+fileName2 = buildFilePath(rawDensityMapsDir, imageNamePrefix + '_PosDMap' + '.tif')
 
 println "saving positive cell density map..."
 
