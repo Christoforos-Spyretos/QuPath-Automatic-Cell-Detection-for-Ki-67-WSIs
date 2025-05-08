@@ -35,4 +35,4 @@ python summary_ratios.py --maps_dir MAPS_DIRECTORY --data_dir PROJECT_DATA_DIREC
 ## Reference
 
 ## License
-This work is licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+This work is licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
