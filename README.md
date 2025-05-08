@@ -1,1 +1,1 @@
-Automatic Quantification of Ki-67 Labeling Index in Pediatric Brain Tumors Using QuPath
+\title{Automatic Quantification of Ki-67 Labeling Index in Pediatric Brain Tumors Using QuPath}
