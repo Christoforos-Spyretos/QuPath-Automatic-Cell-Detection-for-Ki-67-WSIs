@@ -1,0 +1,7 @@
+matplotlib==3.10.1
+numpy==2.2.5
+openslide_python==1.4.1
+pandas==2.2.3
+Pillow==11.2.1
+scipy==1.15.2
+seaborn==0.13.2

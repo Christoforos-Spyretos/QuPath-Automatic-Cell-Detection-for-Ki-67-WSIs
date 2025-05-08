@@ -48,7 +48,7 @@ def projectParentDir = project.getPath().getParent().getParent().toAbsolutePath(
 def out_dir = buildFilePath(projectParentDir, 'results')
 mkdirs(out_dir)
 
-def rawDensityMapsDir = buildFilePath(out_dir, 'Raw Density Maps')
+def rawDensityMapsDir = buildFilePath(out_dir, 'Raw_Density_Maps')
 mkdirs(rawDensityMapsDir)
 
 // Set up image:

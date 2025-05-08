@@ -1,7 +1,3 @@
-'''
-python summary_ratios.py --maps_dir /local/data1/chrsp39/QuPath_Portable/results --data_dir /local/data1/chrsp39/QuPath_Portable/Project/data --csv_path /local/data1/chrsp39/QuPath_Portable/CBTN_KI67.csv --WSIs_path /local/data2/chrsp39/CBTN_v2/new_KI67/WSI --norm_maps_dir Normalized_Maps/ --result_dir Test_Results/ 
-'''
-
 # %% IMPORTS
 import json
 import os
@@ -37,7 +33,7 @@ if not os.path.isfile(csv_path):
 
 WSI_df = pd.read_csv(csv_path)
 
-WSIs_path = args.WSIs_path
+WSIs_dir = args.WSIs_dir
 
 norm_maps_dir = args.norm_maps_dir
 # create the directory to save the normalised maps if it does not exist
@@ -54,7 +50,7 @@ annotation_df = pd.read_csv("results/Area_Det.txt",names=['name', 'detections', 
 
 # %% RETRIEVE INFORMATION FROM JSON FILES 
 file_list = [f for f in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir,f))]
-WSIs = os.listdir(WSIs_path)
+WSIs = os.listdir(WSIs_dir)
 
 # data frame to store the results
 results_df = pd.DataFrame(columns = ['case_id', 'slide_id', 'label', 'Positive_Cell_Count', 'Positive_Cell_Density', 'Negative_Cell_Count', 'Negative_Cell_Density', 'Ki-67 LI', 'Cell_Density'])
