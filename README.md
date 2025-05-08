@@ -42,7 +42,7 @@ The quantification of the Ki-67 labeling index (LI) is critical for assessing tu
    If either `case_id` or `slide_id` is unavailable, the same value can be used for both fields.
 
 5. **Install Miniconda**    
-   Download  and install [Miniconda](https://docs.conda.io/projects/conda/en/latest/index.html) from the official website.
+   Download  and install [Miniconda](https://docs.conda.io/projects/conda/en/latest/index.html) from the official website, it is needed to be able to run the python post-processing script.
 
 6. **Create a Conda Environment**  
    Open a terminal window and create a conda environment following the [instructions](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) from the official website. For example run in the terminal `conda create -n qupath python=3.12`.
