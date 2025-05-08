@@ -19,6 +19,11 @@ The quantification of the Ki-67 labeling index (LI) is critical for assessing tu
 
 ## Post Processing Python Script
 
+To run the post-processing Python script, open a terminal window, navigate to the directory containing all relevant files and folders, then execute the following command:
+```bash
+python summary_ratios.py --maps_dir /local/data1/chrsp39/QuPath_Portable/results --norm_maps_dir Normalized_Maps/ --result_dir Test_Results/ --data_dir /local/data1/chrsp39/QuPath_Portable/Project/data --csv_path /local/data1/chrsp39/QuPath_Portable/CBTN_KI67.csv --WSIs_path /local/data2/chrsp39/CBTN_v2/new_KI67/WSI
+```
+
 ## Reference
 
 ## License
