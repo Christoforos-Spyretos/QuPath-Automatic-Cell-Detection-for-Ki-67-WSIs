@@ -17,14 +17,25 @@ The quantification of the Ki-67 labeling index (LI) is critical for assessing tu
 
 ## Setup
 
-[QuPath](https://qupath.github.io)
+1. Install QuPath
+Begin by downloading and installing QuPath, an open-source software platform for digital pathology image analysis, from the official website:
 
-gitclone the repository, here are the instructions on how to do it [clone git repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+First download QuPath [QuPath](https://qupath.github.io)
 
-Go to the cloned folder and create a folder with the name of the project for example Ki-67 Project.
+2. Clone the Repository
+Next, clone the Git repository that contains the analysis scripts. Follow GitHub’s official instructions here: [clone a GitHub repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
-Create a `.csv` file with the headers `case_id`, `slide_id`, `label`:
 
+3. Create a Project Folder
+Inside the cloned directory, create a new folder to serve as your QuPath project workspace. For example, name it Ki-67 Project.
+
+4. Prepare Metadata
+Create a `.csv` file with the following headers:
+- `case_id`: Unique identifier for each patient or case
+- `slide_id`: Identifier for the whole slide image
+- `label`: Optional label used for grouping or classification (e.g., tumor type)
+
+Here is an example of how the `.csv` should look like:
 | case_id   | slide_id   | label   |
 |-----------|------------|---------|
 | case_001  | slide_001  | label_1 |
