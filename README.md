@@ -37,7 +37,7 @@ The quantification of the Ki-67 labeling index (LI) is critical for assessing tu
    |-----------|------------|---------|
    | case_001  | slide_001  | label_1 |
    | case_002  | slide_002  | label_2 |
-   | case_003  | slide_003  | label_3 |
+   | case_003  | slide_003  | label_1 |
 
    If either `case_id` or `slide_id` is unavailable, the same value can be used for both fields.
 
