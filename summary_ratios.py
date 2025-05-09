@@ -42,7 +42,7 @@ if not os.path.exists(norm_maps_dir):
 
 result_dir = args.result_dir
 # create the directory to save the results if it does not exist
-if os.path.exists(result_dir) == False:
+if not os.path.exists(result_dir):
     os.makedirs(result_dir)
 
 # get the area and total detections
@@ -308,7 +308,7 @@ for folder in file_list:
 
 # %% CREATE SUMMARY STATISTICS
 # save the results to a csv file
-results_df.to_csv(result_dir + 'summary_results.csv', index=False)
+results_df.to_csv(os.path.join(result_dir, 'summary_results.csv'), index=False)
 
 statistics_df = pd.DataFrame(columns = ['variable', 'label', 'mean', 'sd', 'median', 'minimum', 'maximum'])
 
@@ -321,7 +321,7 @@ y_units = {'Positive_Cell_Count': 'Number of positive cells',
            'Ki-67 LI': 'Ki-67 LI', 
            'Cell_Density': 'Number of cells per mm^2'}
 
-res_df = pd.read_csv(result_dir + 'summary_results.csv')
+res_df = pd.read_csv(os.path.join(result_dir, 'summary_results.csv'))
 label_list = np.unique(res_df['label'].tolist())
 
 # summary table and boxplots
@@ -360,9 +360,10 @@ for sp in summary_points:
     plt.xlabel('Diagnosis')
     plt.ylabel(y_units[sp])
     plt.tight_layout()
-    plt.savefig(result_dir + sp + '_BoxPlot.png')
+    plt.savefig(os.path.join(result_dir,sp + '_BoxPlot.png'))
     plt.close()
 
 # summary statistics 
-statistics_df.to_csv(result_dir + 'summary_statistics.csv', index=False)
+statistics_df.to_csv(os.path.join(result_dir, 'summary_statistics.csv'), index=False)
+
 # %%
