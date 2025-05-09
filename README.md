@@ -24,7 +24,7 @@ The quantification of the Ki-67 labeling index (LI) is critical for assessing tu
    Clone this repository by following the official GitHub instructions on [how to clone a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
 3. **Create a Project Folder**  
-   Inside the cloned repository, create a new folder to serve as your QuPath project workspace. For example, it can be named it *Ki-67 Project*.
+   Inside the cloned repository, create a new folder to serve as your QuPath project workspace. For example, it can be named *Ki-67 Project*.
 
 4. **Prepare Metadata**  
    Create a `.csv` file with the following headers:  
