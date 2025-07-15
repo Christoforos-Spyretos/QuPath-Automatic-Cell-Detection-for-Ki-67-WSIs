@@ -55,6 +55,7 @@ mkdirs(rawDensityMapsDir)
 setImageType('BRIGHTFIELD_H_DAB');
 setColorDeconvolutionStains('{"Name" : "H-DAB default", "Stain 1" : "Hematoxylin", "Values 1" : "0.65111 0.70119 0.29049", "Stain 2" : "DAB", "Values 2" : "0.26917 0.56824 0.77759", "Background" : " 255 255 255"}');
 
+/////////////////////////////////////////// Preliminary tissue segmentation /////////////////////////////////////////////
 // Define the relative path for the object_classifiers directory
 def objectClassifiersPath = buildFilePath(projectParentDir, "pixel_classifiers")
 
@@ -65,7 +66,7 @@ selectAnnotations();
 
 selectObjectsByClassification("Region*");
 
-/////////////////////////////////////////// Compute stain normalization vectors /////////////////////////////////////////////
+/////////////////////////////////////////// Estimate stain normalization vectors /////////////////////////////////////////////
 // Based on discussion in https://forum.image.sc/t/qupath-scripting-the-auto-stain-vector-estimation/40707/16.
 ImageData<BufferedImage> imageData = QPEx.getCurrentImageData();
 def imageName =  imageData.getServer().getMetadata().getName()
@@ -84,14 +85,13 @@ if (stains == null || !stains.getStain(3).isResidual(
     return;
 }
     
-///////Select objects as a list///////   
+//Select objects as a list 
 cores_name = ['PathAnnotationObject']; 
 
 //selectObjects = selectAnnotations();
 cores_list = getAnnotationObjects();
 //print(String.format("Selected objects: %s", cores_list.asList()))
 
-//////////////////////////////////////////////////////////////////////////////////////////////
 for (int i = 0; i < cores_list.size(); i++){ // There should only be one annotation, but left the loop just in case.
 	
     PathObject pathObject = cores_list[i];
@@ -130,15 +130,17 @@ hema_vec_num = hema_vec_str.toDouble() // Convert string to number
 // Update the stain vectors:
 setColorDeconvolutionStains('{"Name" : "H-DAB modified by script", "Stain 1" : "Hematoxylin", "Values 1" : "'+hema_vec+'", "Stain 2" : "DAB", "Values 2" : "'+DAB_vec+'", "Background" : " '+background_rgb+' "}');
 }
+
+/////////////////////////////////////////// Threshold-Based Tissue Segmentation /////////////////////////////////////////////
 print('Creating main annotation...')
 def maxRed = imageData.getColorDeconvolutionStains().getMaxRed() // Get the background value
 
 // Create a custom threshold to generate the final annotation, based on background value and hema vector (if necessary):
 if (hema_vec_num >= 0.7) {
-    new_Red = (maxRed - 1)
+    new_Red = (maxRed - 1) // If the hematoxylin vector is light (indicating light staining), use a higher (more permissive) threshold
     general_norm = true
 } else {
-    new_Red = (maxRed - 7)
+    new_Red = (maxRed - 7) // If the hematoxylin vector is high (indicating stronger staining), use a lower (stricter) threshold
     general_norm = false
 }
 
@@ -223,13 +225,10 @@ clearSelectedObjects();
 
 selectAnnotations();
 
+/////////////////////////////////////////////// Option 1: DL with StarDist + thresholding //////////////////////////////////////////////////////////////////
 println "Detecting cells..."
 
-/////////////////////////////////////////////// Option 1: DL with StarDist + thresholding //////////////////////////////////////////////////////////////////
-// IMPORTANT! Replace this with the path to your StarDist model
-// that takes 3 channel RGB as input (e.g. he_heavy_augment.pb)
-// You can find some at https://github.com/qupath/models
-// (Check credit & reuse info before downloading)
+// Define the StarDist2D object for cell detection
 def modelPath = buildFilePath(projectParentDir, "models", "he_heavy_augment.pb")
 
 if(general_norm){ // Normalization over the downsampled full image.
