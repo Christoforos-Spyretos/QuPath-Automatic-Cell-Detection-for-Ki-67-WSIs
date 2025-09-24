@@ -45,7 +45,7 @@ def project = qupath.getProject()
 def projectParentDir = project.getPath().getParent().getParent().toAbsolutePath().toString()
 
 // Create results folder
-def out_dir = buildFilePath(projectParentDir, 'results')
+def out_dir = buildFilePath(projectParentDir, 'Results')
 mkdirs(out_dir)
 
 def rawDensityMapsDir = buildFilePath(out_dir, 'Raw_Density_Maps')
