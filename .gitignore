@@ -1,5 +1,7 @@
 # IGNORE scripts
 test.py
+batch_process_wsi.sh
+run.txt
 
 # IGNORE FOLDERS
 Juan_codes/
@@ -14,3 +16,4 @@ test.csv
 
 # INGORE DEEPLIIF
 DeepLIIF
+
