@@ -286,7 +286,7 @@ println('Computing DAB threshold...')
 String channel = "DAB" // "HTX", "DAB", "Residual" for BF ; use channel name for FL ; "Average":Mean of all channels for BF/FL
 double thresholdDownsample = 4 // 1:Full, 2:Very high, 4:High, 8:Moderate, 16:Low, 32:Very low, 64:Extremely low
 def threshold = "Triangle" // Input threshold value for fixed threshold. Use the following for auto threshold: "Default", "Huang", "Intermodes", "IsoData", "IJ_IsoData", "Li", "MaxEntropy", "Mean", "MinError", "Minimum", "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle", "Yen"
-def thresholdFloor = null // Set a threshold floor value in case auto threshold is too low. Set null to disable
+def thresholdFloor = 0.1 // Set a minimum threshold value
 String output = "threshold value" // "annotation", "detection", "measurement", "preview", "threshold value"
 // Reset preview overlay with "getQuPath().getViewer().resetCustomPixelLayerOverlay()"
 
@@ -348,31 +348,34 @@ def autoThreshold(annotation, channel, thresholdDownsample, threshold, threshold
     // Apply the selected algorithm
     def validThresholds = ["Default", "Huang", "Intermodes", "IsoData", "IJ_IsoData", "Li", "MaxEntropy", "Mean", "MinError", "Minimum", "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle", "Yen"]
 
-    double thresholdValue
-    if (thresholdMethod in validThresholds){
-        // Determine threshold value by auto threshold method
-        ROI pathROI = annotation.getROI() // Get QuPath ROI
-        PathImage pathImage = IJTools.convertToImagePlus(server, RegionRequest.createInstance(server.getPath(), thresholdDownsample, pathROI)) // Get PathImage within bounding box of annotation
-        def ijRoi = IJTools.convertToIJRoi(pathROI, pathImage) // Convert QuPath ROI into ImageJ ROI
-        ImagePlus imagePlus = pathImage.getImage() // Convert PathImage into ImagePlus
-        ImageProcessor ip = imagePlus.getProcessor() // Get ImageProcessor from ImagePlus
-        ip.setRoi(ijRoi) // Add ImageJ ROI to the ImageProcessor to limit the histogram to within the ROI only
+  double thresholdValue
+  if (thresholdMethod in validThresholds){
+    // Determine threshold value by auto threshold method
+    ROI pathROI = annotation.getROI() // Get QuPath ROI
+    PathImage pathImage = IJTools.convertToImagePlus(server, RegionRequest.createInstance(server.getPath(), thresholdDownsample, pathROI)) // Get PathImage within bounding box of annotation
+    def ijRoi = IJTools.convertToIJRoi(pathROI, pathImage) // Convert QuPath ROI into ImageJ ROI
+    ImagePlus imagePlus = pathImage.getImage() // Convert PathImage into ImagePlus
+    ImageProcessor ip = imagePlus.getProcessor() // Get ImageProcessor from ImagePlus
+    ip.setRoi(ijRoi) // Add ImageJ ROI to the ImageProcessor to limit the histogram to within the ROI only
         
-        /*
-        if (darkBackground) {
-            ip.setAutoThreshold("${thresholdMethod} dark")
-        } else {*/
-        ip.setAutoThreshold("${thresholdMethod}")
-        //}
+    /*
+    if (darkBackground) {
+      ip.setAutoThreshold("${thresholdMethod} dark")
+    } else {*/
+    ip.setAutoThreshold("${thresholdMethod}")
+    //}
 
-        thresholdValue = ip.getMaxThreshold()
-        if (thresholdValue != null && thresholdValue < thresholdFloor) {
-            thresholdValue = thresholdFloor
-        }
-    } else {
-        logger.error("Invalid auto-threshold method")
-        return
+    thresholdValue = ip.getMaxThreshold()
+    if (thresholdValue != null && thresholdValue < thresholdFloor) {
+      logger.info("Triangle threshold (${thresholdValue}) is below floor (${thresholdFloor}). Using floor value.")
+      thresholdValue = thresholdFloor
     }
+    logger.info("Calculated ${thresholdMethod} threshold: ${thresholdValue}")
+  }
+  else {
+    logger.error("Invalid auto-threshold method")
+    return
+  }
 
     // If specified output is "threshold value, return threshold value in annotation measurements
     if (output == "threshold value") {
