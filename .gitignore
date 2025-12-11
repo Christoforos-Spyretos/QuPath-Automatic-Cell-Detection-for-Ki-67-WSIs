@@ -2,6 +2,7 @@
 test.py
 batch_process_wsi.sh
 run.txt
+QP_Extensions/scripts/Pos_cellD_Basic_QuPath_project.groovy
 
 # IGNORE FOLDERS
 Juan_codes/

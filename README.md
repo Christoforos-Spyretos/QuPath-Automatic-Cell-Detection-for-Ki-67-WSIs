@@ -71,7 +71,7 @@ To run the Apache Groovy script for automated Ki-67 labeling index (LI) scoring,
    A file browser window will open, either drag and drop the WSIs into this window or navigate through the filesystem to import them. Once imported, the images will appear in the project panel on the left-hand side of the QuPath interface.
 
 4. **Import the StarDist Extension**  
-   Navigate to the directory where the repository is cloned, then to QP Extensions -> extensions. Drag and drop the *qupath-extension-stardist-0.5.0.jar* file into the QuPath window. It will be asked to set a folder to save the program extensions, which can be the same folder where the file was dragged from.
+   Navigate to the directory where the repository is cloned, then to QP_Extensions -> extensions. Drag and drop the *qupath-extension-stardist-0.5.0.jar* file into the QuPath window. It will be asked to set a folder to save the program extensions, which can be the same folder where the file was dragged from.
 
 5. **Run the Project Script**  
    To execute the Groovy script, navigate in the QuPath window to:  
