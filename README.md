@@ -1,4 +1,4 @@
-# Automatic Quantification of Ki-67 Labeling Index in Pediatric Brain Tumors Using QuPath
+# Quantification of Ki-67 labeling index in pediatric brain tumor immunohistochemistry images 
 
 This repository includes an Apache Groovy script (Java-based syntax) for automated Ki-67 LI scoring, along with a Python script for post-processing to generate summary tables and graphical representations of the Ki-67 scores, and visualize density maps.
 
