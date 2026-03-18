@@ -114,16 +114,13 @@ To run the post-processing Python script follow the steps below:
 ## Reference
 
 ```
-@article {Spyretos2025.05.09.25327292,
-	author = {Spyretos, Christoforos and Pardo Ladino, Juan Manuel and Blomstrand, Hakon and Nyman, Per and Snodahl, Oscar and Shamikh, Alia and Elander, Nils O. and Haj-Hosseini, Neda},
-	title = {Automatic Quantification of Ki-67 Labeling Index in Pediatric Brain Tumors Using QuPath},
-	elocation-id = {2025.05.09.25327292},
-	year = {2025},
-	doi = {10.1101/2025.05.09.25327292},
-	publisher = {Cold Spring Harbor Laboratory Press},
-	URL = {https://www.medrxiv.org/content/early/2025/05/12/2025.05.09.25327292},
-	eprint = {https://www.medrxiv.org/content/early/2025/05/12/2025.05.09.25327292.full.pdf},
-	journal = {medRxiv}
+@article{spyretos2026quantification,
+  title={Quantification of Ki-67 labeling index in pediatric brain tumor immunohistochemistry images},
+  author={Spyretos, Christoforos and Pardo Ladino, Juan Manuel and Andersen Blomstrand, Hakon and Nyman, Per and Sn{\"o}dahl, Oscar and Shamikh, Alia and Elander, Nils and Haj-Hosseini, Neda},
+  journal={Journal of Neuropathology \& Experimental Neurology},
+  pages={nlaf163},
+  year={2026},
+  publisher={Oxford University Press}
 }
 ```
 
