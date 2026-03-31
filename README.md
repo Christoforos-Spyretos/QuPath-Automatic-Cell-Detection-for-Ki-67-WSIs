@@ -2,12 +2,12 @@
 
 This repository includes an Apache Groovy script (Java-based syntax) for automated Ki-67 LI scoring, along with a Python script for post-processing to generate summary tables and graphical representations of the Ki-67 scores, and visualize density maps.
 
+![Workflow](Figures/workflow.jpg)
+
 [Article](https://academic.oup.com/jnen/advance-article/doi/10.1093/jnen/nlaf163/8513053) | [Cite](#reference)
 
 ## Abstract   
 Quantification of the Kiel 67 (Ki-67) labeling index (LI) is critical for assessing proliferation and prognosis in tumors but manual scoring remains a common practice. We present an automated framework for Ki-67 scoring in whole slide images (WSIs) developed for research settings using an Apache Groovy code script for QuPath and complemented by a Python postprocessing script that provides cell density maps and summary tables. Tissue segmentation is performed by pixel classifiers and cell segmentation is conducted using StarDist, a deep learning model, followed by adaptive thresholding to classify Ki-67 positive and negative nuclei. The pipeline was applied to a cohort of 632 pediatric brain tumor cases with 734 Ki-67 WSIs from the Children’s Brain Tumor Network. Medulloblastomas showed the highest Ki-67 LI (median: 19.84), followed by atypical teratoid rhabdoid tumors (median: 19.36), brainstem glioma-diffuse intrinsic pontine gliomas (median: 11.50), high-grade gliomas (grades 3, 4) (median: 9.50), and ependymomas (median: 5.88). Lower indices were found in meningiomas (median: 1.84) and the lowest were seen in low-grade gliomas (grades 1, 2) (median: 0.85), dysembryoplastic neuroepithelial tumors (median: 0.63), and gangliogliomas (median: 0.50). The results demonstrate a significant correlation (P < .05) in Ki-67 LI across most of the tumor families/types aligning with neuro-oncology and neuropathology consensus.
-
-![Workflow](Figures/workflow.jpg)
 
 ![Ki-67 LI boxplot](Figures/Ki67_LI_boxplot.png)
 
