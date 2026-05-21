@@ -1,6 +1,6 @@
 # Quantification of Ki-67 Labeling Index in Pediatric Brain Tumor Immunohistochemistry Images 
 
-**Christoforos Spyretos, MSc**<sup>†,1,2</sup>, **Juan Manuel Pardo Ladino, MSc**<sup>1</sup>, **Hakon Andersen Blomstrand, MD, PhD**<sup>3,4</sup>, **Per Nyman, MD**<sup>2,5,6</sup>, **Oscar Snödahl, MD**<sup>2,6,7</sup>, **Alia Shamikh, MD**<sup>8,9</sup>, **Nils Elander, MD, PhD**<sup>4,10</sup>, **Neda Haj-Hosseini, PhD**<sup>1,2</sup>
+**Christoforos Spyretos,**<sup>*,1,2</sup>, **Juan Manuel Pardo Ladino,**<sup>1</sup>, **Hakon Andersen Blomstrand,**<sup>3,4</sup>, **Per Nyman,**<sup>2,5,6</sup>, **Oscar Snödahl,**<sup>2,6,7</sup>, **Alia Shamikh,**<sup>8,9</sup>, **Nils Elander,**<sup>4,10</sup>, **Neda Haj-Hosseini,**<sup>1,2</sup>
 
 <sup>1</sup>Department of Biomedical Engineering, Linköping University, Linköping, Sweden  
 <sup>2</sup>Center for Medical Image Science and Visualization, Linköping University, Linköping, Sweden  
@@ -97,8 +97,9 @@ To run the Apache Groovy script for automated Ki-67 labeling index (LI) scoring,
    A file browser window will open, either drag and drop the WSIs into this window or navigate through the filesystem to import them. Once imported, the images will appear in the project panel on the left-hand side of the QuPath interface.
 
 4. **Import the StarDist Extension**  
-   Navigate to the directory where the repository is cloned, then to QP_Extensions -> extensions. Drag and drop the *qupath-extension-stardist-0.5.0.jar* file into the QuPath window. It will be asked to set a folder to save the program extensions, which can be the same folder where the file was dragged from. The documentation
-   of using StarDist within QuPath is available (here)[https://qupath.readthedocs.io/en/stable/docs/deep/stardist.html].
+   Navigate to the directory where the repository is cloned, then to QP_Extensions -> extensions. Drag and drop the *qupath-extension-stardist-0.5.0.jar* file into the QuPath window. It will be asked to set a folder to save the program extensions, which can be the same folder where the file was dragged from. 
+   
+   The documentation of using StarDist within QuPath is available (here)[https://qupath.readthedocs.io/en/stable/docs/deep/stardist.html].
 
 5. **Run the Project Script**  
    To execute the Groovy script, navigate in the QuPath window to:  
