@@ -1,4 +1,23 @@
-# Quantification of Ki-67 labeling index in pediatric brain tumor immunohistochemistry images 
+# Quantification of Ki-67 Labeling Index in Pediatric Brain Tumor Immunohistochemistry Images 
+
+**Christoforos Spyretos, MSc**<sup>†,1,2</sup>, **Juan Manuel Pardo Ladino, MSc**<sup>1</sup>, **Hakon Andersen Blomstrand, MD, PhD**<sup>3,4</sup>, **Per Nyman, MD**<sup>2,5,6</sup>, **Oscar Snödahl, MD**<sup>2,6,7</sup>, **Alia Shamikh, MD**<sup>8,9</sup>, **Nils Elander, MD, PhD**<sup>4,10</sup>, **Neda Haj-Hosseini, PhD**<sup>1,2</sup>
+
+<sup>1</sup>Department of Biomedical Engineering, Linköping University, Linköping, Sweden  
+<sup>2</sup>Center for Medical Image Science and Visualization, Linköping University, Linköping, Sweden  
+<sup>3</sup>Clinical Department of Clinical Pathology, Region Östergötland, Linköping, Sweden  
+<sup>4</sup>Department of Biomedical and Clinical Sciences, Linköping University, Linköping, Sweden  
+<sup>5</sup>Crown Princess Victoria Children's Hospital, Region Östergötland, Linköping, Sweden  
+<sup>6</sup>Department of Health, Medicine and Caring Sciences, Linköping University, Linköping, Sweden  
+<sup>7</sup>Clinical Department of Radiology in Linköping, Region Östergötland, Linköping, Sweden  
+<sup>8</sup>Department of Clinical Pathology and Cancer Diagnostics, Karolinska University Hospital, Solna, Sweden  
+<sup>9</sup>Department of Oncology-Pathology, Karolinska Institute, Solna, Sweden  
+<sup>10</sup>Clinical Department of Oncology in Linköping, Region Östergötland, Linköping, Sweden  
+
+<sup>\*</sup> Corresponding author: [christoforos.spyretos@liu.se](mailto:christoforos.spyretos@liu.se)
+
+**Author Contributions:** C. Spyretos and J.M. Pardo Ladino contributed equally to this work.
+
+---
 
 This repository includes an Apache Groovy script (Java-based syntax) for automated Ki-67 LI scoring, along with a Python script for post-processing to generate summary tables and graphical representations of the Ki-67 scores, and visualize density maps.
 
@@ -17,6 +36,7 @@ Quantification of the Kiel 67 (Ki-67) labeling index (LI) is critical for assess
 - [Setup](#Setup)
 - [Apache Groovy Script](#groovy)
 - [Post Processing Python Script](#post-processing)
+- [Acknowledgements & Funding](#acknowledgements--funding)
 - [Reference](#reference)
 - [License](#license)
 ---
@@ -77,7 +97,8 @@ To run the Apache Groovy script for automated Ki-67 labeling index (LI) scoring,
    A file browser window will open, either drag and drop the WSIs into this window or navigate through the filesystem to import them. Once imported, the images will appear in the project panel on the left-hand side of the QuPath interface.
 
 4. **Import the StarDist Extension**  
-   Navigate to the directory where the repository is cloned, then to QP_Extensions -> extensions. Drag and drop the *qupath-extension-stardist-0.5.0.jar* file into the QuPath window. It will be asked to set a folder to save the program extensions, which can be the same folder where the file was dragged from.
+   Navigate to the directory where the repository is cloned, then to QP_Extensions -> extensions. Drag and drop the *qupath-extension-stardist-0.5.0.jar* file into the QuPath window. It will be asked to set a folder to save the program extensions, which can be the same folder where the file was dragged from. The documentation
+   of using StarDist within QuPath is available (here)[https://qupath.readthedocs.io/en/stable/docs/deep/stardist.html].
 
 5. **Run the Project Script**  
    To execute the Groovy script, navigate in the QuPath window to:  
@@ -117,8 +138,12 @@ To run the post-processing Python script follow the steps below:
    - a folder with the normalised positive and negative cell density, and Ki-67 LI maps.
    - a folder with summary graphs and tables will be generated.
 
-## Reference
+## Acknowledgements & Funding
+The research was made possible in part due to the [The Children's Brain Tumor Tissue Consortium (CBTTC)/The Children's Brain Tumor Network (CBTN)](https://cbtn.org). The study was financed by the Swedish Childhood Cancer Foundation
+(MT2021-0011, MT2022-0013), the Joanna Cocozza’s Foundation (2025-2026), the Link€ oping University’s Cancer Strength
+Area (2024), and the Medical Research Council of Southeast Sweden (FORSS-1011571).
 
+## Reference
 ```
 @article{spyretos2026quantification,
   title={Quantification of Ki-67 labeling index in pediatric brain tumor immunohistochemistry images},
