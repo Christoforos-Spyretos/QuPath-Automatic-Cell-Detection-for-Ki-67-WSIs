@@ -25,7 +25,7 @@ density maps.
 
 The article is published in the Journal of Neuropathology & Experimental Neurology and is available
 [here](https://academic.oup.com/jnen/advance-article/doi/10.1093/jnen/nlaf163/8513053). For citation information, please
-refer to the [Reference](#reference) section below.
+refer to the [Reference](#reference) section.
 
 ## Abstract   
 Quantification of the Kiel 67 (Ki-67) labeling index (LI) is critical for assessing proliferation and prognosis in
@@ -129,7 +129,7 @@ To run the Apache Groovy script for automated Ki-67 labeling index (LI) scoring,
    *qupath-extension-stardist-0.5.0.jar* file into the QuPath window. It will be asked to set a folder to save the
    program extensions, which can be the same folder where the file was dragged from. 
    
-   The documentation of using StarDist within QuPath is available (here)[https://qupath.readthedocs.io/en/stable/docs/deep/stardist.html].
+   The documentation of using StarDist within QuPath is available [here](https://qupath.readthedocs.io/en/stable/docs/deep/stardist.html).
 
 5. **Run the Project Script**  
    To execute the Groovy script, navigate in the QuPath window to:  
